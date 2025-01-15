@@ -26,4 +26,41 @@ int main(int arge,char const*argv[])
 		perror("setsockopt");
 		exit(EXIT_FAILURE);
 	}
+	address.sin_family=AF_INET;
+	address.sin_addr.s_addr=INADDR_ANY;
+	address.sin_port=htons(PORT);
+	//forcefully attaching socket to the port 8080
+	if(bind(server_fd,(struct sockaddr*)&address,sizeof(address))<0)
+	{
+		perror("bind failed");
+		exit(EXIT_FAILURE);
+	}
+	if(listen(server_fd,4)<0)
+	{
+		perror("listen");
+		exit(EXIT_FAILURE);
+	}
+	for(;;)
+	{
+		if((new_socket=accept(server_fd,(struct sockaddr*)&addrlen,(socklen_t*)&addrlen))<0)
+		{
+			perror("accept");
+			exit(EXIT_FAILURE);
+		}
+		if((childpid=fork())==0)
+		{
+			close(server_fd);
+			for(;;)
+			{
+				valread=read(new_socket,buffer,1024);
+				printf("%s\n",buffer);
+				printf("msg to client: ");
+				scanf("%s",hello);
+				send(new_socket,hello,strlen(hello),0);
+			}
+		}
+		close(new_socket);
+	}
+	return 0;
+}
 	
