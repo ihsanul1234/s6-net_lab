@@ -5,7 +5,7 @@
 #include<string.h>
 #include<unistd.h>
 #define PORT 8080
-int main(int arge,char const*argv[])
+int main(int arge,char const* argv[])
 {
 	int server_fd,new_socket,valread;
 	struct sockaddr_in address;
@@ -35,7 +35,7 @@ int main(int arge,char const*argv[])
 		perror("bind failed");
 		exit(EXIT_FAILURE);
 	}
-	if(listen(server_fd,4)<0)
+	if(listen(server_fd,3)<0)
 	{
 		perror("listen");
 		exit(EXIT_FAILURE);
@@ -63,4 +63,3 @@ int main(int arge,char const*argv[])
 	}
 	return 0;
 }
-	
