@@ -38,5 +38,16 @@ int main()
 	len=sizeof(cliaddr);//len is value/result
 	while(1)
 	{
-		n=recvfrom(sockfd,(char*)buffer,MAXLINE
+		n=recvfrom(sockfd,(char*)buffer,MAXLINE,MSG_WAITALL,(struct sockaddr*)&cliaddr,&len);
+		ct=time(NULL);
+		sprintf(buffer,"%s",ctime(&ct));
+		if((cp==fork())==0)
+		{
+			while(1)
+			{
+				sendto(sockfd,buffer,strlen(buffer),MSG_CONFIRM,(const struct sockaddr*)&cliaddr,len);
+				recvfrom(sockfd,buffer,1024,0,(struct sockaddr*)&cliaddr,&t);
+				sprintf(buffer,"%s",ctime)
+
+
 
