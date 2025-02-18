@@ -47,7 +47,18 @@ int main()
 			{
 				sendto(sockfd,buffer,strlen(buffer),MSG_CONFIRM,(const struct sockaddr*)&cliaddr,len);
 				recvfrom(sockfd,buffer,1024,0,(struct sockaddr*)&cliaddr,&t);
-				sprintf(buffer,"%s",ctime)
+				sprintf(buffer,"%s",ctime(&ct));
+			}
+		}
+		else if(cp<0)
+		{
+			perror("fork error");
+			exit(0);
+		}
+	}
+	close(sockfd);
+	return 0;
+}
 
 
 
