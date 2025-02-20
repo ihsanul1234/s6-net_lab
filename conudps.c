@@ -17,7 +17,7 @@ int main()
 	time_t ct;
 	struct sockaddr_in servaddr,cliaddr;
 	//creating socket file descriptor
-	if(sockfd=socket(AF_INET,SOCK_DGRAM,0))<0)
+	if((sockfd=socket(AF_INET,SOCK_DGRAM,0))<0)
 	{
 		perror("socket creation failed!");
 		exit(EXIT_FAILURE);
@@ -36,6 +36,7 @@ int main()
 	}
 	int len,n;
 	len=sizeof(cliaddr);//len is value/result
+	printf("Server is running and waiting for requests...\n");
 	while(1)
 	{
 		n=recvfrom(sockfd,(char*)buffer,MAXLINE,MSG_WAITALL,(struct sockaddr*)&cliaddr,&len);
