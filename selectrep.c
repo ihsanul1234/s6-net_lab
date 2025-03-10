@@ -1,4 +1,4 @@
-#selective repeat
+/*selective repeat*/
 #include<stdio.h>
 #include<stdlib.h>
 int input(int a[],int frame_size)
@@ -35,7 +35,7 @@ int selective_repeat(int frames[],int window_size,int frame_size)
 		int flag=rand()%2;
 		if(flag)
 		{
-			printf("Frame[%d] with value %d Acknowledge !!!\n\n",i,frames[i]");
+			printf("Frame[%d] with value %d Acknowledge !!!\n\n",i,frames[i]);
 			nt++;
 		}
 		else
@@ -62,19 +62,21 @@ int selective_repeat(int frames[],int window_size,int frame_size)
 		printf("frame[%d] with value %d Acknowledged on second Attempt\n\n",i,left[i]);
 	}
 	printf("Total Transmissions : %d \n\n",nt);
+	return 0;
 }
 int main()
 {
-	int windowsize
-	int framesize
-	printf("");
-	printf("");
-	scanf("");
-	printf("");
-	scanf("");
-	input(frames,frame_size);
-	display(frames,frame_size);
-	selective_repeat(frames);
+	int frame[50];
+	int window_size;
+	int frame_size;
+	printf("\n\n Selective Repeat \n\n");
+	printf("Enter window size : ");
+	scanf("%d",&window_size);
+	printf("Enter Number of frames to be transmitted : ");
+	scanf("%d",&frame_size);
+	input(frame,frame_size);
+	display(frame,frame_size);
+	selective_repeat(frame,window_size,frame_size);
 	return 0;
 }
 	
