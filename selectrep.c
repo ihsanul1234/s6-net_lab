@@ -41,16 +41,17 @@ int selective_repeat(int frames[],int window_size,int frame_size)
 		else
 		{
 			printf("frame[%d]with value %d not Acknowledged !!!\n\n",i,frames[i]);
-			left[k++]=frames[i];
+			left[k++]=i;
 			nt++;
 		}
 		if(i % window_size == 0)
 		{
 			for(int x=0;x<k;x++)
 			{
-				printf("Frame[%d] with value %d retransmitted\n\n",x,left[x]);
+				int lost_frame=left[x];
+				printf("Frame[%d] with value %d retransmitted\n\n",lost_frame,frames[lost_frame]);
 				nt++;
-				printf("frame[%d] with value %d Acknowledged on Second Arrempt \n\n",x,left[x]);
+				printf("frame[%d] with value %d Acknowledged on Second Arrempt \n\n",lost_frame,frames[lost_frame]);
 			}
 			k=0;
 		}
